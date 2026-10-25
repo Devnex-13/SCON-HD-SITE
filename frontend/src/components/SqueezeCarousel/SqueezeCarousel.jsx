@@ -35,6 +35,7 @@ export default function SqueezeCarousel({
   controls = true,
   controlsPlacement = "top",
   showCounter = false,
+  showDetails = true,
   controlsAfter = null,
   heroNextButton = false,
   accent = "#203d60",
@@ -269,29 +270,31 @@ export default function SqueezeCarousel({
         id={`${ids}-panel`}
         role="tabpanel"
         aria-live="polite"
-        className="sq-details"
+        aria-hidden={!showDetails}
+        className={`sq-details${showDetails ? "" : " is-empty"}`}
       >
-        {slides.map((slide, index) => {
-          const shown = index === open;
-          return (
-            <div
-              key={slide.id ?? index}
-              aria-hidden={!shown}
-              className={`sq-detail${shown ? " is-active" : ""}`}
-              style={{
-                opacity: shown ? 1 : 0,
-                visibility: shown ? "visible" : "hidden",
-                pointerEvents: shown ? "auto" : "none",
-              }}
-            >
-              <p>
-                <span>{slide.title}</span>
-                {slide.description && <> {slide.description}</>}
-              </p>
-              {slide.action && <Action slide={slide} shown={shown} />}
-            </div>
-          );
-        })}
+        {showDetails &&
+          slides.map((slide, index) => {
+            const shown = index === open;
+            return (
+              <div
+                key={slide.id ?? index}
+                aria-hidden={!shown}
+                className={`sq-detail${shown ? " is-active" : ""}`}
+                style={{
+                  opacity: shown ? 1 : 0,
+                  visibility: shown ? "visible" : "hidden",
+                  pointerEvents: shown ? "auto" : "none",
+                }}
+              >
+                <p>
+                  <span>{slide.title}</span>
+                  {slide.description && <> {slide.description}</>}
+                </p>
+                {slide.action && <Action slide={slide} shown={shown} />}
+              </div>
+            );
+          })}
       </div>
     </div>
   );

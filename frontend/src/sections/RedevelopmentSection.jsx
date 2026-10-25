@@ -5,7 +5,7 @@ export default function RedevelopmentSection() {
     <section className="redevelopment" id="navotsav">
       <img
         className="redevelopment-image"
-        src="/images/sunlit-cozy-morning.png"
+        src="/images/redevelopment-background.png"
         alt=""
         aria-hidden="true"
       />

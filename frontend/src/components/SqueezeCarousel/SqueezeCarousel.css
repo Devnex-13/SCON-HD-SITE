@@ -177,6 +177,10 @@
   margin-top: 24px;
 }
 
+.sq-details.is-empty {
+  display: none;
+}
+
 .sq-detail {
   grid-column: 1;
   grid-row: 1;

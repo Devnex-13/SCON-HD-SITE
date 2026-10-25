@@ -109,7 +109,6 @@ const slides = Object.entries(developments).flatMap(([category, projects]) =>
     id: `${category}-${index}`,
     category,
     title: project.name,
-    description: `${category} address at ${project.location}.`,
     image: project.image,
     imageAlt: `${project.name}, ${project.location}`,
     overlay: (
@@ -161,6 +160,7 @@ export default function DevelopmentsSection() {
             accentForeground="#ffffff"
             controlsPlacement="below"
             showCounter
+            showDetails={false}
             heroNextButton
             controlsAfter={
               <div
