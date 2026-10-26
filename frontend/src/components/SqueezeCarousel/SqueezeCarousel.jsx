@@ -226,11 +226,40 @@ export default function SqueezeCarousel({
                 tabIndex={front ? 0 : -1}
                 className="sq-card"
                 onClick={() => col > 0 && step(col)}
+                onPointerMove={(event) => {
+                  if (event.pointerType !== "mouse") return;
+
+                  const bounds = event.currentTarget.getBoundingClientRect();
+                  const x = (event.clientX - bounds.left) / bounds.width;
+                  const y = (event.clientY - bounds.top) / bounds.height;
+                  event.currentTarget.style.setProperty(
+                    "--sq-tilt-x",
+                    `${(0.5 - y) * 3}deg`,
+                  );
+                  event.currentTarget.style.setProperty(
+                    "--sq-tilt-y",
+                    `${(x - 0.5) * 3}deg`,
+                  );
+                  event.currentTarget.style.setProperty(
+                    "--sq-pointer-x",
+                    `${x * 100}%`,
+                  );
+                  event.currentTarget.style.setProperty(
+                    "--sq-pointer-y",
+                    `${y * 100}%`,
+                  );
+                }}
+                onPointerLeave={(event) => {
+                  event.currentTarget.style.setProperty("--sq-tilt-x", "0deg");
+                  event.currentTarget.style.setProperty("--sq-tilt-y", "0deg");
+                }}
                 style={{
                   width,
                   marginLeft: place === 0 ? 0 : "var(--sq-gap)",
                   borderRadius: `min(var(--sq-radius), calc(${width} / 2))`,
-                  transitionDuration: still ? "0s" : "var(--sq-ms)",
+                  transitionDuration: still
+                    ? "0s"
+                    : "var(--sq-ms), var(--sq-ms), 450ms",
                 }}
               >
                 <Picture slide={slide} />

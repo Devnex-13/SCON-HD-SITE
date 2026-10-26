@@ -755,16 +755,166 @@ button {
   text-align: left;
 }
 
-.development-slide-label > span,
+.development-slide-label > span:first-child,
 .development-slide-label small {
   color: rgb(255 255 255 / 82%);
   font-size: 11px;
+}
+
+.development-slide-label > span:first-child {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.development-slide-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.development-slide-title svg {
+  flex: 0 0 auto;
+  opacity: 0;
+  transform: translateX(-5px);
+  transition:
+    opacity 350ms ease,
+    transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .development-slide-label strong {
   font-family: "Cabinet Grotesk", sans-serif;
   font-size: 18px;
   font-weight: 600;
+}
+
+.development-premium .sq-picture {
+  transition:
+    transform 850ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 850ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.development-premium .sq-overlay {
+  transition: opacity 450ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.development-premium .sq-overlay .development-slide-label {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 400ms ease,
+    transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.development-premium .sq-overlay.is-open .development-slide-label,
+.development-premium .sq-card:hover .sq-overlay .development-slide-label,
+.development-premium .sq-card:focus-visible .sq-overlay .development-slide-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.development-premium .sq-card:hover .sq-overlay,
+.development-premium .sq-card:focus-visible .sq-overlay {
+  opacity: 1;
+}
+
+.development-premium .sq-card {
+  transition-property: width, margin-left, transform;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.development-carousel.is-visible .development-premium .sq-card {
+  animation: development-card-arrive 800ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.development-carousel.is-visible .development-premium .sq-card:nth-child(2) {
+  animation-delay: 90ms;
+  --sq-arrival-x: 48px;
+  --sq-arrival-y: -12px;
+}
+
+.development-carousel.is-visible .development-premium .sq-card:nth-child(3) {
+  animation-delay: 180ms;
+  --sq-arrival-x: -38px;
+  --sq-arrival-y: 14px;
+}
+
+.development-carousel.is-visible .development-premium .sq-card:nth-child(4) {
+  animation-delay: 270ms;
+  --sq-arrival-x: 42px;
+  --sq-arrival-y: -10px;
+}
+
+@keyframes development-card-arrive {
+  from {
+    opacity: 0;
+    translate: var(--sq-arrival-x, -48px) var(--sq-arrival-y, 16px);
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.development-premium .sq-card:hover,
+.development-premium .sq-card:focus-visible {
+  z-index: 3;
+  transform:
+    perspective(1100px)
+    rotateX(var(--sq-tilt-x, 0deg))
+    rotateY(var(--sq-tilt-y, 0deg))
+    scale(1.015);
+}
+
+.development-premium .sq-card:hover .sq-picture,
+.development-premium .sq-card:focus-visible .sq-picture {
+  transform: translateX(-50%) scale(1.045);
+  filter: saturate(1.06);
+}
+
+.development-premium .sq-overlay.is-open .development-slide-title svg {
+  opacity: 0.9;
+  transform: translateX(0);
+}
+
+.development-premium .sq-card:hover .development-slide-title svg,
+.development-premium .sq-card:focus-visible .development-slide-title svg {
+  opacity: 0.9;
+  transform: translateX(0);
+}
+
+.development-premium .sq-card:hover .sq-overlay,
+.development-premium .sq-card:focus-visible .sq-overlay {
+  background: linear-gradient(
+    to top,
+    rgb(0 0 0 / 68%),
+    rgb(0 0 0 / 8%) 72%,
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .development-carousel.is-visible .development-premium .sq-card {
+    animation: none;
+  }
+
+  .development-premium .sq-picture,
+  .development-slide-title svg,
+  .development-premium .sq-overlay,
+  .development-premium .sq-overlay .development-slide-label {
+    transition: none;
+  }
+
+  .development-premium .sq-card:hover .sq-picture,
+  .development-premium .sq-card:focus-visible .sq-picture {
+    transform: translateX(-50%);
+  }
+
+  .development-premium .sq-card:hover,
+  .development-premium .sq-card:focus-visible {
+    transform: none;
+  }
 }
 
 .redevelopment {

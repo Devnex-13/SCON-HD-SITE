@@ -114,7 +114,24 @@ const slides = Object.entries(developments).flatMap(([category, projects]) =>
     overlay: (
       <span className="development-slide-label">
         <span>{category}</span>
-        <strong>{project.name}</strong>
+        <span className="development-slide-title">
+          <strong>{project.name}</strong>
+          <svg
+            aria-hidden="true"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <path
+              d="M5 12h14m-6-6 6 6-6 6"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
         <small>{project.location}</small>
       </span>
     ),
@@ -152,6 +169,7 @@ export default function DevelopmentsSection() {
         <div className="development-carousel" data-scroll-reveal="3">
           <SqueezeCarousel
             key={activeCategory}
+            className="development-premium"
             slides={categorySlides}
             label="Selected developments"
             height="clamp(180px, 26cqi, 310px)"
